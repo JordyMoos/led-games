@@ -1,7 +1,7 @@
 
 import argparse
 import sys
-from games.presets import game_presets
+from games.games import games
 import defaults
 from config.pair_config import PairConfig
 from config.led_config import LedConfig
@@ -16,8 +16,8 @@ class Main:
             usage='''python3 ./main.py <command> [<args>]
 
 The most commonly used commands are:
-   list       List all the presets
-   run        Run a preset
+   list       List all the games
+   run        Run a game
 ''')
         parser.add_argument('command', help='Subcommand to run')
         args = parser.parse_args(sys.argv[1:2])
@@ -30,15 +30,15 @@ The most commonly used commands are:
     @staticmethod
     def list():
         parser = argparse.ArgumentParser(
-            description='List all presets')
+            description='List all games')
         args = parser.parse_args(sys.argv[2:])
-        print(game_presets.keys())
+        print(games.keys())
 
     @staticmethod
     def run():
         parser = argparse.ArgumentParser(
-            description='Run a preset')
-        parser.add_argument('preset')
+            description='Run a game')
+        parser.add_argument('game')
         parser.add_argument('--renderer',
                             choices=['LED', 'PYGAME'],
                             default=defaults.DEFAULT_RENDERER,
@@ -85,7 +85,7 @@ The most commonly used commands are:
                             help='How fast the game runs. Default: %s' % defaults.DEFAULT_FPS)
 
         args = parser.parse_args(sys.argv[2:])
-        preset = game_presets[args.preset]
+        game_setup = games[args.game]
         led_config = LedConfig(
             total=int(args.total_leds),
             per_cell=int(args.max_leds),
@@ -107,7 +107,7 @@ The most commonly used commands are:
             serial_port=args.serial_port,
             fps=int(args.fps)
         )
-        game = preset.create(config)
+        game = game_setup.create(config)
 
         engine = GameEngine(args.renderer, config, game)
         engine.start()

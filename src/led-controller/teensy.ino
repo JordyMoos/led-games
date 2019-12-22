@@ -2,6 +2,13 @@
 
 const int ledsPerStrip = 100; // 150;
 const int strips = 8; // 4;
+
+/*
+
+    End of configuration
+
+*/
+
 const int totalLeds = ledsPerStrip * strips;
 
 DMAMEM int displayMemory[ledsPerStrip*6];

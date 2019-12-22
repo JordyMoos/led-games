@@ -133,33 +133,33 @@ class JoystickInputHandler:
 
         if event.type == pygame.JOYAXISMOTION:
             if event.axis == 0:
-                if event.value < -0.8:
+                if event.value < -0.4:
                     buttons.get(Buttons.left).press(tick)
-                elif event.value > 0.8:
+                elif event.value > 0.4:
                     buttons.get(Buttons.right).press(tick)
                 else:
                     buttons.get(Buttons.left).release()
                     buttons.get(Buttons.right).release()
             elif event.axis == 1:
-                if event.value < -0.8:
+                if event.value < -0.4:
                     buttons.get(Buttons.up).press(tick)
-                elif event.value > 0.8:
+                elif event.value > 0.4:
                     buttons.get(Buttons.down).press(tick)
                 else:
                     buttons.get(Buttons.up).release()
                     buttons.get(Buttons.down).release()
             if event.axis == 6:
-                if event.value < -0.8:
+                if event.value < -0.4:
                     buttons.get(Buttons.left).press(tick)
-                elif event.value > 0.8:
+                elif event.value > 0.4:
                     buttons.get(Buttons.right).press(tick)
                 else:
                     buttons.get(Buttons.left).release()
                     buttons.get(Buttons.right).release()
             elif event.axis == 7:
-                if event.value < -0.8:
+                if event.value < -0.4:
                     buttons.get(Buttons.up).press(tick)
-                elif event.value > 0.8:
+                elif event.value > 0.4:
                     buttons.get(Buttons.down).press(tick)
                 else:
                     buttons.get(Buttons.up).release()
