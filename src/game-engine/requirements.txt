@@ -1,5 +1,4 @@
 pyserial
 Pillow
-pyscreenshot
 argparse
 pygame
