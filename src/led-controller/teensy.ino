@@ -41,7 +41,7 @@ void loop() {
     unsigned int unusedField = 0;
     int count = Serial.readBytes((char *)&unusedField, 2);
     if (count != 2) {
-      //Serial.println("Expected 2 butes");
+      //Serial.println("Expected 2 bytes");
       return;
     }
     count = Serial.readBytes((char *)readBuffer, sizeof(readBuffer));
@@ -70,8 +70,6 @@ void loop() {
     clearLeds();
     Serial.println("Clearing leds");
   } else if (startChar == '?') {
-    // when the video application asks, give it all our info
-    // for easy and automatic configuration
     Serial.println("Here I can return some debug information");
   } else if (startChar >= 0) {
     // discard unknown characters
@@ -81,7 +79,6 @@ void loop() {
 
 
 void showLeds() {
-  // set all pixels to BLACK.  
   digitalWrite(13, HIGH);
   for (int i = 0; i < totalLeds; i++) {
     leds.setPixel(i, 0x003300);
@@ -92,7 +89,6 @@ void showLeds() {
 
 
 void clearLeds() {
-  // set all pixels to BLACK.  
   digitalWrite(13, HIGH);
   for (int i = 0; i < totalLeds; i++) {
     leds.setPixel(i, 0x000000);
