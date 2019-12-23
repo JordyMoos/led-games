@@ -15,7 +15,7 @@ git clone git@github.com:JordyMoos/led-games.git
 
 The leds are controller by a [Teensy](https://www.pjrc.com/store/teensy32_pins.html) and the code is located here:
 ```
-./src/led-controller/teensy.ino
+./src/led-controller/led-controller.ino
 ```
 
 You should change these values to match your led setup.
