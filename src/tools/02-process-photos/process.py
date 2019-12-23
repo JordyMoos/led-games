@@ -123,4 +123,36 @@ for led_index in range(START_LED, TOTAL_LEDS):
     view_file.write("%d\n" % led_index)
 
 
+# close the file handles
+pair_file.close()
+view_file.close()
+
+# print information we need for the game engine
+print("")
+print("Pair file path:")
+print(os.path.abspath(PAIR_FILE))
+print("")
+print("View file path:")
+print(os.path.abspathVIEW_FILE))
+print("")
+
+# caclulate the mins and maxes
+lines = [
+    list(map(int, line.rstrip('\n').split(',', 3)))
+    for line in open(PAIR_FILE)
+]
+
+xs = list(map(lambda line: line[1], lines))
+ys = list(map(lambda line: line[2], lines))
+
+# and print those to
+print('x min = %d' % min(xs))
+print('x max = %d' % max(xs))
+print('')
+print('y min %d' % min(ys))
+print('y max %d' % max(ys))
+
+print("")
+print("")
+
 print("Done!")
