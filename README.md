@@ -4,6 +4,10 @@ The code base to play games in your led strips.
 
 With [gaming in your Christmas tree as an example](https://twitter.com/JordyMoos/status/1206568610275241984)
 
+# Video tutorial
+
+[You can check this video tutorial explaining how the project works](https://youtu.be/Hp4fiNjiIkM)
+
 ## Installation
 
 Check out the repository
