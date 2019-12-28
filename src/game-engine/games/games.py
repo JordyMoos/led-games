@@ -8,6 +8,7 @@ from games.move.game import MoveGame
 from games.snake.game import SnakeGame
 from games.snake_two.game import SnakeTwoGame
 from games.tictactoe.game import TicTacToe
+from games.new_year.game import NewYearGame
 
 
 class GameSetup:
@@ -34,5 +35,6 @@ games = {
     'move': GameSetup((lambda config: MoveGame(config)), 'Move the lines with the controller'),
     'snake': GameSetup((lambda config: SnakeGame(config)), 'Snake game'),
     'snake-two': GameSetup((lambda config: SnakeTwoGame(config)), 'Snake multiplayer game'),
-    'tictactoe': GameSetup((lambda config: TicTacToe(config)), 'TicTacToe multiplayer')
+    'tictactoe': GameSetup((lambda config: TicTacToe(config)), 'TicTacToe multiplayer'),
+    'new-year': GameSetup((lambda config: NewYearGame(config)), 'New year countdown')
 }

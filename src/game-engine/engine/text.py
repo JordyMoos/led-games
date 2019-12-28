@@ -1,4 +1,5 @@
-class Text:
+
+class TextCreator:
     # Design = List Int
     # dictionary = Dict Char Design
     dictionary = {
@@ -137,11 +138,11 @@ class Text:
               "o o",
               "o o",
               " o "],
-        '1': ["o",
-              "o",
-              "o",
-              "o",
-              "o"],
+        '1': ["  o",
+              "  o",
+              "  o",
+              "  o",
+              "  o"],
         '2': [" o ",
               "o o",
               "  o",
@@ -225,14 +226,18 @@ class Text:
     }
 
     def __init__(self):
-        self.letters = {char: Text.__design_to_letter(design) for char, design in Text.dictionary.items()}
+        self.letters = {char: TextCreator.__design_to_letter(design) for char, design in TextCreator.dictionary.items()}
 
     def string_to_letters(self, string):
-        return [self.letters.get(char) for char in string.lower() if self.letters.get(char)]
+        return Text([self.letters.get(char) for char in string.lower() if self.letters.get(char)])
 
     @staticmethod
     def __get_width(design):
         return max([len(line) for line in design])
+
+    @staticmethod
+    def __get_height(design):
+        return len(design)
 
     @staticmethod
     def __get_positions(design):
@@ -248,8 +253,45 @@ class Text:
 
     @staticmethod
     def __design_to_letter(design):
-        return {
-            'width': Text.__get_width(design),
-            'positions': Text.__get_positions(design)
-        }
+        return Letter(
+            TextCreator.__get_width(design),
+            TextCreator.__get_height(design),
+            TextCreator.__get_positions(design)
+        )
 
+
+class Text:
+    def __init__(self, letters):
+        self.__letters = letters
+        self.__spacing = 1
+
+    def draw(self, screen, start_x, start_y):
+        for letter in self.__letters:
+            letter.draw(screen, start_x, start_y)
+            start_x += letter.width + self.__spacing
+
+
+class Letter:
+    def __init__(self, width, height, positions):
+        self.__width = width
+        self.__height = height
+        self.__positions = positions
+        self.__color = (255, 0, 0)
+        self.__view_index = 0
+
+    def draw(self, screen, start_x, start_y):
+        for position in self.__positions:
+            coord = (position['x'] + start_x, position['y'] + start_y)
+            screen.set_cell_color(self.__view_index, coord, self.__color)
+
+    @property
+    def width(self):
+        return self.__width
+
+    @property
+    def height(self):
+        return self.__height
+
+    @property
+    def positions(self):
+        return self.__positions
