@@ -1,4 +1,3 @@
-
 class TextCreator:
     # Design = List Int
     # dictionary = Dict Char Design
@@ -264,11 +263,52 @@ class Text:
     def __init__(self, letters):
         self.__letters = letters
         self.__spacing = 1
+        self.__scale = 1
 
-    def draw(self, screen, start_x, start_y):
+    '''
+        `horizontal_alignment`
+        Can be from 0 to 100.
+        Where 0 is left aligned
+        50 is centered
+        and 100 is right aligned
+        
+        Same idea for `vertical_alignment`
+    '''
+
+    def draw(self, screen, horizontal_alignment, vertical_alignment):
+        start_x = self.__calculate_start_x(screen, horizontal_alignment)
+        start_y = self.__calculate_start_y(screen, vertical_alignment)
         for letter in self.__letters:
-            letter.draw(screen, start_x, start_y)
-            start_x += letter.width + self.__spacing
+            letter.draw(screen, self.__scale, start_x, start_y)
+            start_x += (letter.width + self.__spacing) * self.__scale
+
+    def set_spacing(self, spacing):
+        self.__spacing = spacing
+
+    def set_scale(self, scale):
+        self.__scale = max(1, round(scale))
+
+    @property
+    def __width(self):
+        letters_length = sum([letter.width for letter in self.__letters])
+        spacing_length = (len(self.__letters) - 1) * self.__spacing
+        return (letters_length + spacing_length) * self.__scale
+
+    @property
+    def __height(self):
+        return max([letter.height for letter in self.__letters]) * self.__scale
+
+    def __calculate_start_x(self, screen, horizontal_alignment):
+        text_width = self.__width
+        screen_width = screen.grid_width
+        starting_point = round((screen_width - text_width) / 100 * horizontal_alignment)
+        return max(0, min(screen_width, starting_point))
+
+    def __calculate_start_y(self, screen, vertical_alignment):
+        text_height = self.__height
+        screen_height = screen.grid_height
+        starting_point = round((screen_height - text_height) / 100 * vertical_alignment)
+        return max(0, min(screen_height, starting_point))
 
 
 class Letter:
@@ -279,10 +319,15 @@ class Letter:
         self.__color = (255, 0, 0)
         self.__view_index = 0
 
-    def draw(self, screen, start_x, start_y):
+    def draw(self, screen, scale, start_x, start_y):
         for position in self.__positions:
-            coord = (position['x'] + start_x, position['y'] + start_y)
-            screen.set_cell_color(self.__view_index, coord, self.__color)
+            for x in range(0, scale):
+                for y in range(0, scale):
+                    coord = (
+                        (position['x'] * scale) + x + start_x,
+                        (position['y'] * scale) + y + start_y
+                    )
+                    screen.set_cell_color(self.__view_index, coord, self.__color)
 
     @property
     def width(self):

@@ -15,6 +15,14 @@ class Screen:
     def views(self):
         return self.__views
 
+    @property
+    def grid_width(self):
+        return self.__config.pair.grid_width
+
+    @property
+    def grid_height(self):
+        return self.__config.pair.grid_height
+
     def get_view(self, view_index=1):
         return self.__views[view_index]
 
