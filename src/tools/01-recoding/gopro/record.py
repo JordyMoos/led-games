@@ -29,7 +29,9 @@ STARTING_LED_INDEX = 0
 # COLOR = (255, 0, 0) # bright red
 # COLOR = (0, 255, 0) # bright green
 # COLOR = (0, 0, 255) # bright blue
-COLOR = (100, 0, 0)   # not too bright red
+COLOR = (50, 0, 0)   # not too bright red
+
+
 
 '''
 
@@ -49,6 +51,7 @@ class Record:
         self.total_leds = total_leds
 
         self.cam = GoProCamera.GoPro()
+        '''
         self.ser = serial.Serial(
            port=SERIAL_PORT,
            baudrate=9600,
@@ -57,6 +60,7 @@ class Record:
            bytesize=serial.EIGHTBITS,
            timeout=1
         )
+        '''
         self.clear_leds()
 
     def record(self):
@@ -69,17 +73,18 @@ class Record:
     def create_background(self, led_index):
         print("Creating background")
         self.clear_leds()
-        time.sleep(0.1)
-        self.cam.take_photo()
-        self.cam.downloadLastMedia(custom_filename="%s/%05d-background.jpg" % (STORE_STRATEGY_DIR, led_index))
+        # time.sleep(0.1)
+        self.cam.take_photo(0.5)
+        #self.cam.downloadLastMedia(custom_filename="%s/%05d-background.jpg" % (STORE_STRATEGY_DIR, led_index))
 
     def record_led(self, led_index):
         print("Recording led %d" % led_index)
         self.clear_leds()
         self.turn_on_current_led(led_index)
-        time.sleep(0.1)
-        self.cam.take_photo()
-        self.cam.downloadLastMedia(custom_filename="%s/%05d-led.jpg" % (STORE_STRATEGY_DIR, led_index))
+        # time.sleep(0.1)
+        filename = self.cam.take_photo(0.5)
+
+        #self.cam.downloadLastMedia(custom_filename="%s/%05d-led.jpg" % (STORE_STRATEGY_DIR, led_index))
 
     def clear_leds(self):
         self.leds = [0, 0, 0] * TOTAL_LEDS
@@ -93,9 +98,10 @@ class Record:
         self.render_leds()
 
     def render_leds(self):
-        self.ser.write(bytes(
-            list('*'.encode()) +
-            list(TOTAL_LEDS.to_bytes(2, byteorder='big')) + self.leds))
+        pass
+        #self.ser.write(bytes(
+        #    list('*'.encode()) +
+        #    list(TOTAL_LEDS.to_bytes(2, byteorder='big')) + self.leds))
 
 
 record = Record(STARTING_LED_INDEX, TOTAL_LEDS, BACKGROUND_INTERVAL)
