@@ -133,7 +133,7 @@ print("Pair file path:")
 print(os.path.abspath(PAIR_FILE))
 print("")
 print("View file path:")
-print(os.path.abspathVIEW_FILE))
+print(os.path.abspath(VIEW_FILE))
 print("")
 
 # caclulate the mins and maxes
