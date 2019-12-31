@@ -57,7 +57,7 @@ class PreCountdownGameState:
 
     def update(self, players):
         second = datetime.datetime.now().second
-        if second > 30:
+        if second > 49:
             return CountdownGameState(self.__config)
 
         for led_index, pulse_color in self.__leds.items():
@@ -116,7 +116,7 @@ class TwentyTwentyGameState:
         return self
 
     def view(self, screen):
-        self.__text.draw(screen, Color.random_color(), 50, 60)
+        self.__text.draw(screen, Color.random_color(maximum=100), 50, 60)
 
 
 class BigBangGameState:
@@ -282,16 +282,17 @@ class PulseColor:
 
 class Color:
     @staticmethod
-    def random_color():
+    def random_color(maximum=250):
+        maximum = min(250, maximum)
         red = 0
         green = 0
         blue = 0
         colors = random.randrange(1, 8)
         if 1 & colors:
-            red = random.randrange(1, 250, 5)
+            red = random.randrange(1, maximum)
         if 2 & colors:
-            green = random.randrange(1, 250, 5)
+            green = random.randrange(1, maximum)
         if 4 & colors:
-            blue = random.randrange(1, 250, 5)
+            blue = random.randrange(1, maximum)
 
         return (red, green, blue)
