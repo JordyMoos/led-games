@@ -85,9 +85,9 @@ class CountdownState:
 
     def update(self, players):
         # Check if time is past, than return firework state
-        # minute = datetime.datetime.now().minute
-        # if minute % 2 == 0:
-        #     return BigBangState(self.__config)
+        minute = datetime.datetime.now().minute
+        if minute % 2 == 0:
+            return BigBangState(self.__config)
 
         seconds_left = 60 - datetime.datetime.now().second
         self.__text = self.__text_creator.string_to_letters(str(seconds_left))
@@ -109,10 +109,32 @@ class CountdownState:
 class BigBangState:
     def __init__(self, config):
         self.__config = config
+        self.__grid_width = config.pair.grid_width
+        self.__grid_height = config.pair.grid_height
+        self.__y = self.__grid_height + 1
 
     def update(self, players):
+        if self.__y == 0:
+            return FireworkState(self.__config)
+
+        self.__y = max(self.__y - 2, 0)
 
         return self
+
+    def view(self, screen):
+        for x in range(0, self.__grid_width):
+            for y in range(self.__y, self.__grid_height):
+                screen.set_cell_color(0, (x, y), (250, 0, 0))
+
+
+class FireworkState:
+    def __init__(self, config):
+        self.__config = config
+        self.__grid_width = config.pair.grid_width
+        self.__grid_height = config.pair.grid_height
+
+    def update(self, players):
+        return PulseState(self.__config)
 
     def view(self, screen):
         pass
