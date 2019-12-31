@@ -22,7 +22,7 @@ class PulseState:
 
         led_percentage = 10
         for led_index in range(0, self.__config.led.total):
-            if random.randrange(0, 100) >= led_percentage:
+            if random.randrange(0, 100) <= led_percentage:
                 self.__leds[led_index] = PulseColor((250, 50, 0))
 
     def update(self, players):
@@ -46,9 +46,9 @@ class PreCountdownState:
         self.__config = config
         self.__leds = {}
 
-        led_percentage = 10
+        led_percentage = 20
         for led_index in range(0, self.__config.led.total):
-            if random.randrange(0, 100) >= led_percentage:
+            if random.randrange(0, 100) <= led_percentage:
                 red = 0
                 green = 0
                 blue = 0
@@ -64,7 +64,7 @@ class PreCountdownState:
     def update(self, players):
         second = datetime.datetime.now().second
         if second > 30:
-            return PreCountdownState(self.__config)
+            return CountdownState(self.__config)
 
         for led_index, pulse_color in self.__leds.items():
             pulse_color.update()
