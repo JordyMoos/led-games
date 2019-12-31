@@ -7,12 +7,12 @@ DEFAULT_SERIAL_PORT = '/dev/ttyACM0'
 # Pair data
 # DEFAULT_PAIRING_FILE = '../data/pair.csv'
 # DEFAULT_VIEW_FILES = ['./data/view-1.csv', './data/view-2.csv']
-DEFAULT_PAIRING_FILE = '../../tutorials/01-introduction/tree-data-2/pair-1577748280.csv'
-DEFAULT_VIEW_FILES = ['../../tutorials/01-introduction/tree-data-2/view-1577748280-1.csv', '../../tutorials/01-introduction/tree-data-2/view-1577748280-1.csv']
-DEFAULT_PAIRING_MIN_X = 900
-DEFAULT_PAIRING_MAX_X = 2020
-DEFAULT_PAIRING_MIN_Y = 640
-DEFAULT_PAIRING_MAX_Y = 3050
+DEFAULT_PAIRING_FILE = '../../tutorials/01-introduction/tree-data-4/pair-1577773029.csv'
+DEFAULT_VIEW_FILES = ['../../tutorials/01-introduction/tree-data-4/view-1577773029-1.csv', '../../tutorials/01-introduction/tree-data-4/view-1577773029-1.csv']
+DEFAULT_PAIRING_MIN_X = 850
+DEFAULT_PAIRING_MAX_X = 2040
+DEFAULT_PAIRING_MIN_Y = 635
+DEFAULT_PAIRING_MAX_Y = 2800
 
 DEFAULT_GRID_WIDTH = 12
 DEFAULT_GRID_HEIGHT = 12
