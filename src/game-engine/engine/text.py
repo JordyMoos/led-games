@@ -132,11 +132,11 @@ class TextCreator:
               " o ",
               "o  ",
               "ooo"],
-        '0': [" o ",
+        '0': ["ooo",
               "o o",
               "o o",
               "o o",
-              " o "],
+              "ooo"],
         '1': ["  o",
               "  o",
               "  o",
@@ -275,11 +275,11 @@ class Text:
         Same idea for `vertical_alignment`
     '''
 
-    def draw(self, screen, horizontal_alignment, vertical_alignment):
+    def draw(self, screen, color, horizontal_alignment, vertical_alignment):
         start_x = self.__calculate_start_x(screen, horizontal_alignment)
         start_y = self.__calculate_start_y(screen, vertical_alignment)
         for letter in self.__letters:
-            letter.draw(screen, self.__scale, start_x, start_y)
+            letter.draw(screen, color, self.__scale, start_x, start_y)
             start_x += (letter.width + self.__spacing) * self.__scale
 
     def set_spacing(self, spacing):
@@ -316,10 +316,9 @@ class Letter:
         self.__width = width
         self.__height = height
         self.__positions = positions
-        self.__color = (255, 0, 0)
         self.__view_index = 0
 
-    def draw(self, screen, scale, start_x, start_y):
+    def draw(self, screen, color, scale, start_x, start_y):
         for position in self.__positions:
             for x in range(0, scale):
                 for y in range(0, scale):
@@ -327,7 +326,7 @@ class Letter:
                         (position['x'] * scale) + x + start_x,
                         (position['y'] * scale) + y + start_y
                     )
-                    screen.set_cell_color(self.__view_index, coord, self.__color)
+                    screen.set_cell_color(self.__view_index, coord, color)
 
     @property
     def width(self):
