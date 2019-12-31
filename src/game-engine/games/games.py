@@ -3,7 +3,9 @@ from games.off.game import AllOffGame
 from games.on.game import AllOnGame
 from games.pulse.game import PulseGame
 from games.input.game import InputGame
+from games.input_led.game import InputLedGame
 from games.iterate.game import IterateGame
+from games.iterate_led.game import IterateLedGame
 from games.move.game import MoveGame
 from games.snake.game import SnakeGame
 from games.snake_two.game import SnakeTwoGame
@@ -26,8 +28,10 @@ class GameSetup:
 
 games = {
     #'screen-recording': Preset((lambda config: ScreenRecordingGame(config)), 'Screen Recording Game'),
-    'iterate': GameSetup((lambda config: IterateGame(config)), 'Iterate through all the leds'),
+    'iterate': GameSetup((lambda config: IterateGame(config)), 'Iterate through all the cells'),
+    'iterate-led': GameSetup((lambda config: IterateLedGame(config)), 'Iterate through all the leds'),
     'input': GameSetup((lambda config: InputGame(config)), 'Tell which cell to command'),
+    'input-led': GameSetup((lambda config: InputLedGame(config)), 'Tell which led to command'),
     'on': GameSetup((lambda config: AllOnGame(config)), 'Turn all the leds on'),
     'off': GameSetup((lambda config: AllOffGame(config)), 'Turn all the leds off'),
     'pulse': GameSetup((lambda config: PulseGame(config, 'fixed')), 'Pulse the leds in yellow'),

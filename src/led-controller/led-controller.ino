@@ -1,6 +1,6 @@
 #include <OctoWS2811.h>
 
-const int ledsPerStrip = 100; // 150;
+const int ledsPerStrip = 150; // 150;
 const int strips = 8; // 4;
 
 /*
